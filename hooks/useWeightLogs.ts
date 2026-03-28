@@ -42,7 +42,7 @@ export const useWeightLogs = (days: number = 30) => {
         .select('*')
         .eq('user_id', user!.id)
         .gte('logged_at', startDate.toISOString())
-        .order('logged_at', { ascending: false });
+        .order('logged_at', { ascending: true });
 
       if (error) throw error;
       setWeightLogs(data || []);
@@ -127,6 +127,19 @@ export const useWeightLogs = (days: number = 30) => {
     await loadWeightLogs();
   };
 
+  const deleteAllWeightLogs = async () => {
+    if (!user) throw new Error('No user logged in');
+
+    const { error } = await supabase
+      .from('weight_logs')
+      .delete()
+      .eq('user_id', user.id);
+
+    if (error) throw error;
+    
+    await loadWeightLogs();
+  };
+
   const getWeightTrend = (): WeightTrend => {
     if (weightLogs.length === 0) {
       return {
@@ -137,8 +150,8 @@ export const useWeightLogs = (days: number = 30) => {
       };
     }
 
-    const current = weightLogs[0].weight_kg;
-    const previous = weightLogs.length > 1 ? weightLogs[weightLogs.length - 1].weight_kg : current;
+    const current = weightLogs[weightLogs.length - 1].weight_kg;
+    const previous = weightLogs.length > 1 ? weightLogs[0].weight_kg : current;
     const change = current - previous;
     const percentChange = previous !== 0 ? (change / previous) * 100 : 0;
 
@@ -152,7 +165,7 @@ export const useWeightLogs = (days: number = 30) => {
 
   const getLatestWeight = (): number | null => {
     if (weightLogs.length === 0) return null;
-    return weightLogs[0].weight_kg;
+    return weightLogs[weightLogs.length - 1].weight_kg;
   };
 
   return {
@@ -161,6 +174,7 @@ export const useWeightLogs = (days: number = 30) => {
     error,
     createWeightLog,
     deleteWeightLog,
+    deleteAllWeightLogs,
     refreshLogs: loadWeightLogs,
     weightTrend: getWeightTrend(),
     latestWeight: getLatestWeight(),

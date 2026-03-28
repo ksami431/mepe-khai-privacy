@@ -25,6 +25,21 @@ export interface Database {
           daily_protein_target: number | null
           daily_carbs_target: number | null
           daily_fats_target: number | null
+          daily_sugar_limit_g: number | null
+          daily_sodium_limit_mg: number | null
+          daily_potassium_min_mg: number | null
+          daily_fiber_min_g: number | null
+          daily_cholesterol_limit_mg: number | null
+          daily_saturated_fat_limit_g: number | null
+          daily_unsaturated_fat_min_g: number | null
+          daily_calcium_min_mg: number | null
+          daily_iron_min_mg: number | null
+          daily_vitamin_c_min_mg: number | null
+          daily_vitamin_a_min_mcg: number | null
+          daily_vitamin_d_min_mcg: number | null
+          daily_water_goal_ml: number | null
+          water_reminder_enabled: boolean
+          water_reminder_interval_hours: number | null
           notifications_enabled: boolean
           breakfast_reminder_time: string | null
           lunch_reminder_time: string | null
@@ -50,6 +65,21 @@ export interface Database {
           daily_protein_target?: number | null
           daily_carbs_target?: number | null
           daily_fats_target?: number | null
+          daily_sugar_limit_g?: number | null
+          daily_sodium_limit_mg?: number | null
+          daily_potassium_min_mg?: number | null
+          daily_fiber_min_g?: number | null
+          daily_cholesterol_limit_mg?: number | null
+          daily_saturated_fat_limit_g?: number | null
+          daily_unsaturated_fat_min_g?: number | null
+          daily_calcium_min_mg?: number | null
+          daily_iron_min_mg?: number | null
+          daily_vitamin_c_min_mg?: number | null
+          daily_vitamin_a_min_mcg?: number | null
+          daily_vitamin_d_min_mcg?: number | null
+          daily_water_goal_ml?: number | null
+          water_reminder_enabled?: boolean
+          water_reminder_interval_hours?: number | null
           notifications_enabled?: boolean
           breakfast_reminder_time?: string | null
           lunch_reminder_time?: string | null
@@ -75,6 +105,21 @@ export interface Database {
           daily_protein_target?: number | null
           daily_carbs_target?: number | null
           daily_fats_target?: number | null
+          daily_sugar_limit_g?: number | null
+          daily_sodium_limit_mg?: number | null
+          daily_potassium_min_mg?: number | null
+          daily_fiber_min_g?: number | null
+          daily_cholesterol_limit_mg?: number | null
+          daily_saturated_fat_limit_g?: number | null
+          daily_unsaturated_fat_min_g?: number | null
+          daily_calcium_min_mg?: number | null
+          daily_iron_min_mg?: number | null
+          daily_vitamin_c_min_mg?: number | null
+          daily_vitamin_a_min_mcg?: number | null
+          daily_vitamin_d_min_mcg?: number | null
+          daily_water_goal_ml?: number | null
+          water_reminder_enabled?: boolean
+          water_reminder_interval_hours?: number | null
           notifications_enabled?: boolean
           breakfast_reminder_time?: string | null
           lunch_reminder_time?: string | null
@@ -95,10 +140,23 @@ export interface Database {
           protein: number
           carbs: number
           fats: number
+          sugar_g: number | null
+          sodium_mg: number | null
+          potassium_mg: number | null
+          fiber_g: number | null
+          cholesterol_mg: number | null
+          saturated_fat_g: number | null
+          unsaturated_fat_g: number | null
+          calcium_mg: number | null
+          iron_mg: number | null
+          vitamin_c_mg: number | null
+          vitamin_a_mcg: number | null
+          vitamin_d_mcg: number | null
           meal_type: 'breakfast' | 'lunch' | 'dinner' | 'snack' | null
           logged_at: string
           image_url: string | null
           ai_analyzed: boolean
+          weight_grams: number | null
           created_at: string
         }
         Insert: {
@@ -109,10 +167,23 @@ export interface Database {
           protein?: number
           carbs?: number
           fats?: number
+          sugar_g?: number | null
+          sodium_mg?: number | null
+          potassium_mg?: number | null
+          fiber_g?: number | null
+          cholesterol_mg?: number | null
+          saturated_fat_g?: number | null
+          unsaturated_fat_g?: number | null
+          calcium_mg?: number | null
+          iron_mg?: number | null
+          vitamin_c_mg?: number | null
+          vitamin_a_mcg?: number | null
+          vitamin_d_mcg?: number | null
           meal_type?: 'breakfast' | 'lunch' | 'dinner' | 'snack' | null
           logged_at?: string
           image_url?: string | null
           ai_analyzed?: boolean
+          weight_grams?: number | null
           created_at?: string
         }
         Update: {
@@ -123,10 +194,23 @@ export interface Database {
           protein?: number
           carbs?: number
           fats?: number
+          sugar_g?: number | null
+          sodium_mg?: number | null
+          potassium_mg?: number | null
+          fiber_g?: number | null
+          cholesterol_mg?: number | null
+          saturated_fat_g?: number | null
+          unsaturated_fat_g?: number | null
+          calcium_mg?: number | null
+          iron_mg?: number | null
+          vitamin_c_mg?: number | null
+          vitamin_a_mcg?: number | null
+          vitamin_d_mcg?: number | null
           meal_type?: 'breakfast' | 'lunch' | 'dinner' | 'snack' | null
           logged_at?: string
           image_url?: string | null
           ai_analyzed?: boolean
+          weight_grams?: number | null
           created_at?: string
         }
       }
@@ -162,6 +246,18 @@ export interface Database {
           protein: number
           carbs: number
           fats: number
+          sugar_g: number | null
+          sodium_mg: number | null
+          potassium_mg: number | null
+          fiber_g: number | null
+          cholesterol_mg: number | null
+          saturated_fat_g: number | null
+          unsaturated_fat_g: number | null
+          calcium_mg: number | null
+          iron_mg: number | null
+          vitamin_c_mg: number | null
+          vitamin_a_mcg: number | null
+          vitamin_d_mcg: number | null
           meal_type: 'breakfast' | 'lunch' | 'dinner' | 'snack' | null
           weight_grams: number | null
           created_at: string
@@ -175,6 +271,18 @@ export interface Database {
           protein?: number
           carbs?: number
           fats?: number
+          sugar_g?: number | null
+          sodium_mg?: number | null
+          potassium_mg?: number | null
+          fiber_g?: number | null
+          cholesterol_mg?: number | null
+          saturated_fat_g?: number | null
+          unsaturated_fat_g?: number | null
+          calcium_mg?: number | null
+          iron_mg?: number | null
+          vitamin_c_mg?: number | null
+          vitamin_a_mcg?: number | null
+          vitamin_d_mcg?: number | null
           meal_type?: 'breakfast' | 'lunch' | 'dinner' | 'snack' | null
           weight_grams?: number | null
           created_at?: string
@@ -188,6 +296,18 @@ export interface Database {
           protein?: number
           carbs?: number
           fats?: number
+          sugar_g?: number | null
+          sodium_mg?: number | null
+          potassium_mg?: number | null
+          fiber_g?: number | null
+          cholesterol_mg?: number | null
+          saturated_fat_g?: number | null
+          unsaturated_fat_g?: number | null
+          calcium_mg?: number | null
+          iron_mg?: number | null
+          vitamin_c_mg?: number | null
+          vitamin_a_mcg?: number | null
+          vitamin_d_mcg?: number | null
           meal_type?: 'breakfast' | 'lunch' | 'dinner' | 'snack' | null
           weight_grams?: number | null
           created_at?: string
@@ -205,6 +325,18 @@ export interface Database {
           protein: number
           carbs: number
           fats: number
+          sugar_g: number | null
+          sodium_mg: number | null
+          potassium_mg: number | null
+          fiber_g: number | null
+          cholesterol_mg: number | null
+          saturated_fat_g: number | null
+          unsaturated_fat_g: number | null
+          calcium_mg: number | null
+          iron_mg: number | null
+          vitamin_c_mg: number | null
+          vitamin_a_mcg: number | null
+          vitamin_d_mcg: number | null
           weight_grams: number | null
           created_at: string
         }
@@ -218,6 +350,18 @@ export interface Database {
           protein?: number
           carbs?: number
           fats?: number
+          sugar_g?: number | null
+          sodium_mg?: number | null
+          potassium_mg?: number | null
+          fiber_g?: number | null
+          cholesterol_mg?: number | null
+          saturated_fat_g?: number | null
+          unsaturated_fat_g?: number | null
+          calcium_mg?: number | null
+          iron_mg?: number | null
+          vitamin_c_mg?: number | null
+          vitamin_a_mcg?: number | null
+          vitamin_d_mcg?: number | null
           weight_grams?: number | null
           created_at?: string
         }
@@ -231,7 +375,42 @@ export interface Database {
           protein?: number
           carbs?: number
           fats?: number
+          sugar_g?: number | null
+          sodium_mg?: number | null
+          potassium_mg?: number | null
+          fiber_g?: number | null
+          cholesterol_mg?: number | null
+          saturated_fat_g?: number | null
+          unsaturated_fat_g?: number | null
+          calcium_mg?: number | null
+          iron_mg?: number | null
+          vitamin_c_mg?: number | null
+          vitamin_a_mcg?: number | null
+          vitamin_d_mcg?: number | null
           weight_grams?: number | null
+          created_at?: string
+        }
+      }
+      water_logs: {
+        Row: {
+          id: string
+          user_id: string
+          amount_ml: number
+          logged_at: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          amount_ml: number
+          logged_at?: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          amount_ml?: number
+          logged_at?: string
           created_at?: string
         }
       }

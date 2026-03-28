@@ -5,6 +5,7 @@ import { Input } from '@/components/Input';
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
 import { useAuth } from '@/hooks/useAuth';
+import { useWeightLogs } from '@/hooks/useWeightLogs';
 import { calculateMacroTargets } from '@/lib/calculations';
 import { ACTIVITY_LEVELS, GOALS, GENDERS } from '@/lib/constants';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -18,6 +19,7 @@ export default function EditProfileScreen() {
   const router = useRouter();
   const { theme } = useTheme();
   const { user, profile, updateProfile } = useAuth();
+  const { createWeightLog } = useWeightLogs();
   const [saving, setSaving] = useState(false);
   const styles = createStyles(theme);
 
@@ -97,6 +99,11 @@ export default function EditProfileScreen() {
         daily_carbs_target: targets.carbs,
         daily_fats_target: targets.fats,
       });
+
+      // Create weight log entry if weight changed
+      if (profile?.weight_kg !== weightNum) {
+        await createWeightLog(weightNum);
+      }
 
       Alert.alert('Success', 'Profile updated successfully!', [
         { text: 'OK', onPress: () => router.back() }

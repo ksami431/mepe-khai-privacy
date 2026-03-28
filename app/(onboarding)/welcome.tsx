@@ -1,55 +1,19 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Button } from '@/components/Button';
 import { ProgressBar } from '@/components/ProgressBar';
 import { Logo } from '@/components/Logo';
-import { useAuth } from '@/hooks/useAuth';
+import { OnboardingHeader } from '@/components/OnboardingHeader';
 import { Colors, Spacing, FontSize, FontWeight } from '@/constants/theme';
 
 export default function OnboardingWelcomeScreen() {
   const router = useRouter();
-  const { signOut } = useAuth();
-
-  const handleBack = async () => {
-    console.log('Back button pressed!');
-    Alert.alert(
-      'Exit Onboarding?',
-      'You can complete your profile later. Do you want to sign out?',
-      [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Sign Out',
-          style: 'destructive',
-          onPress: async () => {
-            console.log('Signing out from onboarding...');
-            await signOut();
-            router.replace('/');
-          },
-        },
-      ]
-    );
-  };
-
-  const handleSignOut = async () => {
-    console.log('Sign out button pressed!');
-    try {
-      await signOut();
-      console.log('Sign out successful, navigating to welcome...');
-      router.replace('/');
-    } catch (error) {
-      console.error('Sign out error:', error);
-      Alert.alert('Error', 'Failed to sign out');
-    }
-  };
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={handleBack} style={styles.backButton}>
-          <Text style={styles.backButtonText}>← Back</Text>
-        </TouchableOpacity>
-      </View>
+      <OnboardingHeader showBack={false} />
+      <View style={{ height: 100 }} />
       <ProgressBar current={1} total={5} />
       
       <View style={styles.content}>
@@ -72,12 +36,6 @@ export default function OnboardingWelcomeScreen() {
           title="Let's Get Started"
           onPress={() => router.push('/personal-info')}
         />
-        <Button
-          title="Sign Out"
-          onPress={handleSignOut}
-          variant="outline"
-          style={styles.signOutButton}
-        />
       </View>
     </View>
   );
@@ -94,19 +52,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.white,
-  },
-  header: {
-    paddingHorizontal: Spacing.lg,
-    paddingTop: Spacing.lg,
-    paddingBottom: Spacing.sm,
-  },
-  backButton: {
-    alignSelf: 'flex-start',
-  },
-  backButtonText: {
-    fontSize: FontSize.base,
-    color: Colors.primary,
-    fontWeight: FontWeight.semibold,
   },
   content: {
     flex: 1,
@@ -146,8 +91,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.lg,
     paddingBottom: Spacing.xxl,
     gap: Spacing.md,
-  },
-  signOutButton: {
-    marginTop: Spacing.sm,
   },
 });

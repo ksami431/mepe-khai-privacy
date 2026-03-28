@@ -82,6 +82,11 @@ export const useAuth = () => {
   const signOut = async () => {
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
+    
+    // Clear local state immediately
+    setUser(null);
+    setProfile(null);
+    setSession(null);
   };
 
   const updateProfile = async (updates: Partial<Profile>) => {
@@ -103,6 +108,17 @@ export const useAuth = () => {
     return data;
   };
 
+  const deleteAccount = async () => {
+    if (!user) throw new Error('No user logged in');
+
+    // Call Supabase function to delete all user data
+    const { error } = await supabase.rpc('delete_user_account');
+    if (error) throw error;
+
+    // Sign out after deletion
+    await signOut();
+  };
+
   return {
     user,
     profile,
@@ -112,5 +128,6 @@ export const useAuth = () => {
     signUp,
     signOut,
     updateProfile,
+    deleteAccount,
   };
 };

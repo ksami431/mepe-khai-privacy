@@ -6,14 +6,12 @@ import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { MealTypeSelector, MealType } from '@/components/MealTypeSelector';
-import { BarcodeScanner } from '@/components/BarcodeScanner';
 import { RecipeInput } from '@/components/RecipeInput';
 import { useAuth } from '@/hooks/useAuth';
 import { useFoodLogs } from '@/hooks/useFoodLogs';
 import { useFavorites } from '@/hooks/useFavorites';
 import { analyzeImageFood, analyzeTextFood, analyzeRecipe } from '@/lib/gemini';
 import { uploadFoodImage } from '@/lib/storage';
-import { searchProductByBarcode, calculateNutritionForServing } from '@/lib/openfoodfacts';
 import { getMealTypeByTime } from '@/lib/constants';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Spacing, FontSize, FontWeight } from '@/constants/theme';
@@ -31,9 +29,6 @@ export default function LogFoodScreen() {
   const [weight, setWeight] = useState('');
   const [uploadedImageUrl, setUploadedImageUrl] = useState<string | null>(null);
   const [selectedMealType, setSelectedMealType] = useState<MealType | null>(null);
-  const [showBarcodeScanner, setShowBarcodeScanner] = useState(false);
-  const [scannedProduct, setScannedProduct] = useState<any>(null);
-  const [servingSize, setServingSize] = useState('');
   const [showRecipeInput, setShowRecipeInput] = useState(false);
   const [recipeData, setRecipeData] = useState<any>(null);
   const [selectedServings, setSelectedServings] = useState('');
@@ -138,6 +133,18 @@ export default function LogFoodScreen() {
         protein: analysisResult.protein,
         carbs: analysisResult.carbs,
         fats: analysisResult.fats,
+        sugar_g: analysisResult.sugar || 0,
+        sodium_mg: analysisResult.sodium || 0,
+        potassium_mg: analysisResult.potassium || 0,
+        fiber_g: analysisResult.fiber || 0,
+        cholesterol_mg: analysisResult.cholesterol || 0,
+        saturated_fat_g: analysisResult.saturated_fat || 0,
+        unsaturated_fat_g: analysisResult.unsaturated_fat || 0,
+        calcium_mg: analysisResult.calcium || 0,
+        iron_mg: analysisResult.iron || 0,
+        vitamin_c_mg: analysisResult.vitamin_c || 0,
+        vitamin_a_mcg: analysisResult.vitamin_a || 0,
+        vitamin_d_mcg: analysisResult.vitamin_d || 0,
         meal_type: selectedMealType,
         logged_at: new Date().toISOString(),
         image_url: uploadedImageUrl,
@@ -226,61 +233,6 @@ export default function LogFoodScreen() {
     }
   };
 
-  const handleBarcodeScanned = async (barcode: string) => {
-    setShowBarcodeScanner(false);
-    setAnalyzing(true);
-
-    try {
-      const productData = await searchProductByBarcode(barcode);
-      
-      if (!productData) {
-        Alert.alert(
-          'Product Not Found',
-          'This product is not in our database. Please try manual entry.',
-          [
-            { text: 'Manual Entry', onPress: () => router.push('/(tabs)/manual-entry') },
-            { text: 'Scan Again', onPress: () => setShowBarcodeScanner(true) },
-            { text: 'Cancel', style: 'cancel' }
-          ]
-        );
-        setAnalyzing(false);
-        return;
-      }
-
-      setScannedProduct(productData);
-      setServingSize('100');
-      setSelectedMealType(getMealTypeByTime());
-      
-      const nutrition = calculateNutritionForServing(productData, 100);
-      setAnalysisResult({
-        meal_name: `${productData.productName}${productData.brand ? ' (' + productData.brand + ')' : ''}`,
-        ...nutrition,
-        confidence: 'high',
-      });
-    } catch (error) {
-      console.error('Error processing barcode:', error);
-      Alert.alert('Error', 'Failed to fetch product information. Please try again.');
-    } finally {
-      setAnalyzing(false);
-    }
-  };
-
-  const handleRecalculateServingSize = () => {
-    if (!scannedProduct || !servingSize.trim()) return;
-
-    const grams = parseFloat(servingSize);
-    if (isNaN(grams) || grams <= 0) {
-      Alert.alert('Invalid Input', 'Please enter a valid serving size in grams');
-      return;
-    }
-
-    const nutrition = calculateNutritionForServing(scannedProduct, grams);
-    setAnalysisResult({
-      ...analysisResult,
-      ...nutrition,
-    });
-    setWeight(servingSize);
-  };
 
   const handleRecipeAnalysis = async (recipeText: string) => {
     setAnalyzing(true);
@@ -513,12 +465,6 @@ export default function LogFoodScreen() {
             style={styles.button}
           />
           <Button
-            title="Scan Barcode"
-            onPress={() => setShowBarcodeScanner(true)}
-            variant="outline"
-            style={styles.button}
-          />
-          <Button
             title="Analyze Recipe"
             onPress={() => setShowRecipeInput(true)}
             variant="outline"
@@ -532,17 +478,6 @@ export default function LogFoodScreen() {
           />
         </View>
       </View>
-
-      <Modal
-        visible={showBarcodeScanner}
-        animationType="slide"
-        onRequestClose={() => setShowBarcodeScanner(false)}
-      >
-        <BarcodeScanner
-          onBarcodeScanned={handleBarcodeScanned}
-          onClose={() => setShowBarcodeScanner(false)}
-        />
-      </Modal>
 
       <Modal
         visible={showRecipeInput}

@@ -1,0 +1,16 @@
+# Tech Stack Rules
+- Framework: React Native with Expo (Expo Router for navigation)
+- Language: TypeScript (Strict mode enabled)
+- Styling: NativeWind (Tailwind CSS for React Native)
+- Backend: Supabase (Auth, Postgres, Storage)
+- AI Services: Google Gemini API
+- State Management: React Context or Zustand (keep it simple)
+
+# Coding Standards
+- Write modular, functional React components.
+- Always use TypeScript interfaces/types for props and Supabase database rows.
+- Use Expo Router file-based routing standard (app/ directory).
+- Style exclusively using NativeWind `className` attributes. Avoid standard React Native `StyleSheet` unless absolutely necessary for complex animations.
+- When interacting with Supabase, use the official `@supabase/supabase-js` client.
+- Securely store API keys (Gemini, Supabase) using Expo environment variables (`.env`). DO NOT hardcode keys.
+- Prioritize mobile-first UI, ensuring safe area views (`SafeAreaView` from `react-native-safe-area-context`) are used to avoid notches.

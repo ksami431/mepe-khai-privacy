@@ -24,7 +24,7 @@ export default function ProgressScreen() {
   const { theme } = useTheme();
   const { profile } = useAuth();
   const { getFoodLogsByDateRange } = useFoodLogs();
-  const { weightLogs, weightTrend, latestWeight, createWeightLog } = useWeightLogs(90);
+  const { weightLogs, weightTrend, latestWeight, createWeightLog, deleteAllWeightLogs } = useWeightLogs(90);
   const [period, setPeriod] = useState<TimePeriod>('week');
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState<any>(null);
@@ -90,7 +90,12 @@ export default function ProgressScreen() {
   const styles = createStyles(theme);
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.content}>
+    <ScrollView 
+      style={styles.container} 
+      contentContainerStyle={styles.content}
+      nestedScrollEnabled={true}
+      showsVerticalScrollIndicator={true}
+    >
       <View style={styles.header}>
         <View style={styles.titleRow}>
           <Text style={styles.title}>📊 Your Progress</Text>
@@ -201,12 +206,42 @@ export default function ProgressScreen() {
       <Card style={styles.weightCard}>
         <View style={styles.weightHeader}>
           <Text style={styles.weightTitle}>⚖️ Weight Tracking</Text>
-          <TouchableOpacity
-            style={styles.logWeightButton}
-            onPress={() => setShowWeightModal(true)}
-          >
-            <Text style={styles.logWeightText}>+ Log Weight</Text>
-          </TouchableOpacity>
+          <View style={styles.weightActions}>
+            <TouchableOpacity
+              style={styles.logWeightButton}
+              onPress={() => setShowWeightModal(true)}
+            >
+              <Text style={styles.logWeightText}>+ Log Weight</Text>
+            </TouchableOpacity>
+            {weightLogs.length > 0 && (
+              <TouchableOpacity
+                style={styles.resetButton}
+                onPress={() => {
+                  Alert.alert(
+                    'Reset Weight Tracking',
+                    'Are you sure you want to delete all weight logs? This action cannot be undone.',
+                    [
+                      { text: 'Cancel', style: 'cancel' },
+                      {
+                        text: 'Reset',
+                        style: 'destructive',
+                        onPress: async () => {
+                          try {
+                            await deleteAllWeightLogs();
+                            Alert.alert('Success', 'Weight tracking has been reset');
+                          } catch (error: any) {
+                            Alert.alert('Error', error.message || 'Failed to reset weight tracking');
+                          }
+                        },
+                      },
+                    ]
+                  );
+                }}
+              >
+                <Text style={styles.resetButtonText}>🔄 Reset</Text>
+              </TouchableOpacity>
+            )}
+          </View>
         </View>
 
         {latestWeight && (
@@ -241,7 +276,7 @@ export default function ProgressScreen() {
       <WeightEntryModal
         visible={showWeightModal}
         onClose={() => setShowWeightModal(false)}
-        onSave={createWeightLog}
+        onSave={(weight, date) => createWeightLog(weight, date.toLocaleDateString('en-CA'))}
         currentWeight={latestWeight || profile?.weight_kg || undefined}
       />
     </ScrollView>
@@ -351,10 +386,14 @@ const createStyles = (theme: any) => StyleSheet.create({
     marginBottom: Spacing.xl,
   },
   weightHeader: {
+    marginBottom: Spacing.md,
+  },
+  weightActions: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: Spacing.md,
+    gap: Spacing.sm,
+    marginTop: Spacing.sm,
   },
   weightTitle: {
     fontSize: FontSize.lg,
@@ -362,15 +401,32 @@ const createStyles = (theme: any) => StyleSheet.create({
     color: theme.text,
   },
   logWeightButton: {
-    paddingHorizontal: Spacing.md,
-    paddingVertical: Spacing.sm,
-    borderRadius: BorderRadius.md,
+    flex: 1,
     backgroundColor: theme.primary,
+    paddingVertical: Spacing.xs,
+    paddingHorizontal: Spacing.md,
+    borderRadius: BorderRadius.md,
+    alignItems: 'center',
   },
   logWeightText: {
+    color: theme.white,
     fontSize: FontSize.sm,
     fontWeight: FontWeight.semibold,
-    color: theme.white,
+  },
+  resetButton: {
+    flex: 1,
+    backgroundColor: theme.backgroundGray,
+    paddingVertical: Spacing.xs,
+    paddingHorizontal: Spacing.md,
+    borderRadius: BorderRadius.md,
+    borderWidth: 1,
+    borderColor: theme.border,
+    alignItems: 'center',
+  },
+  resetButtonText: {
+    color: theme.textLight,
+    fontSize: FontSize.sm,
+    fontWeight: FontWeight.semibold,
   },
   currentWeight: {
     alignItems: 'center',

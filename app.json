@@ -6,6 +6,7 @@
     "orientation": "portrait",
     "scheme": "mepekhai",
     "userInterfaceStyle": "automatic",
+    "privacy": "public",
     "icon": "./assets/images/icon.png",
     "splash": {
       "image": "./assets/images/splash.png",
@@ -17,12 +18,13 @@
       "bundleIdentifier": "com.mepekhai.app",
       "infoPlist": {
         "NSCameraUsageDescription": "Mepe Khai needs access to your camera to take photos of your meals for AI analysis.",
-        "NSPhotoLibraryUsageDescription": "Mepe Khai needs access to your photo library to select meal photos for AI analysis."
+        "NSPhotoLibraryUsageDescription": "Mepe Khai needs access to your photo library to select meal photos for AI analysis.",
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#2d9f6f"
       },
       "package": "com.mepekhai.app",
@@ -30,13 +32,12 @@
         "android.permission.CAMERA",
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
         "android.permission.RECORD_AUDIO"
       ]
-    },
-    "web": {
-      "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
       "expo-router",
@@ -64,6 +65,12 @@
         "projectId": "b8175dbf-4d83-42c5-a3e3-bf09bf74e678"
       }
     },
-    "owner": "skhan7787"
+    "owner": "skhan7787",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/b8175dbf-4d83-42c5-a3e3-bf09bf74e678"
+    }
   }
 }

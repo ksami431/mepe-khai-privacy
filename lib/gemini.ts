@@ -9,6 +9,18 @@ export interface FoodAnalysisResult {
   protein: number;
   carbs: number;
   fats: number;
+  sugar?: number;
+  sodium?: number;
+  potassium?: number;
+  fiber?: number;
+  cholesterol?: number;
+  saturated_fat?: number;
+  unsaturated_fat?: number;
+  calcium?: number;
+  iron?: number;
+  vitamin_c?: number;
+  vitamin_a?: number;
+  vitamin_d?: number;
   confidence: 'high' | 'medium' | 'low';
   items?: Array<{
     food: string;
@@ -91,7 +103,7 @@ export const analyzeTextFood = async (text: string, weightGrams?: number): Promi
       foodDescription = `${text} (weight: ${weightGrams} grams)`;
     }
 
-    const prompt = `You are a nutrition expert. Analyze the following food description and provide nutritional information in JSON format.
+    const prompt = `You are a nutrition expert. Analyze the following food description and provide comprehensive nutritional information in JSON format.
 
 Food description: "${foodDescription}"
 
@@ -104,6 +116,18 @@ Return ONLY a valid JSON object with this exact structure (no additional text):
   "protein": protein_grams_as_number,
   "carbs": carbs_grams_as_number,
   "fats": fats_grams_as_number,
+  "sugar": sugar_grams_as_number,
+  "sodium": sodium_milligrams_as_number,
+  "potassium": potassium_milligrams_as_number,
+  "fiber": fiber_grams_as_number,
+  "cholesterol": cholesterol_milligrams_as_number,
+  "saturated_fat": saturated_fat_grams_as_number,
+  "unsaturated_fat": unsaturated_fat_grams_as_number,
+  "calcium": calcium_milligrams_as_number,
+  "iron": iron_milligrams_as_number,
+  "vitamin_c": vitamin_c_milligrams_as_number,
+  "vitamin_a": vitamin_a_micrograms_as_number,
+  "vitamin_d": vitamin_d_micrograms_as_number,
   "confidence": "high" or "medium" or "low",
   "items": [
     {
@@ -116,7 +140,7 @@ Return ONLY a valid JSON object with this exact structure (no additional text):
   ]
 }
 
-Be accurate with macro calculations.`;
+Be as accurate as possible. If you cannot determine a specific micronutrient value, use 0.`;
 
     const result = await model.generateContent(prompt);
     const response = await result.response;
@@ -139,7 +163,7 @@ export const analyzeImageFood = async (imageBase64: string): Promise<FoodAnalysi
   try {
     const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
-    const prompt = `You are a nutrition expert. Analyze this food image and provide detailed nutritional information in JSON format.
+    const prompt = `You are a nutrition expert. Analyze this food image and provide comprehensive nutritional information in JSON format.
 
 Identify all visible food items and estimate their quantities and nutritional values.
 
@@ -150,6 +174,18 @@ Return ONLY a valid JSON object with this exact structure (no additional text):
   "protein": protein_grams_as_number,
   "carbs": carbs_grams_as_number,
   "fats": fats_grams_as_number,
+  "sugar": sugar_grams_as_number,
+  "sodium": sodium_milligrams_as_number,
+  "potassium": potassium_milligrams_as_number,
+  "fiber": fiber_grams_as_number,
+  "cholesterol": cholesterol_milligrams_as_number,
+  "saturated_fat": saturated_fat_grams_as_number,
+  "unsaturated_fat": unsaturated_fat_grams_as_number,
+  "calcium": calcium_milligrams_as_number,
+  "iron": iron_milligrams_as_number,
+  "vitamin_c": vitamin_c_milligrams_as_number,
+  "vitamin_a": vitamin_a_micrograms_as_number,
+  "vitamin_d": vitamin_d_micrograms_as_number,
   "confidence": "high" or "medium" or "low",
   "items": [
     {
@@ -162,7 +198,7 @@ Return ONLY a valid JSON object with this exact structure (no additional text):
   ]
 }
 
-Be as accurate as possible with portion size estimation and macro calculations.`;
+Be as accurate as possible with portion size estimation and all nutritional calculations. If you cannot determine a specific micronutrient value, use 0.`;
 
     const imagePart = {
       inlineData: {

@@ -4,6 +4,7 @@ import { useRouter } from 'expo-router';
 import { Input } from '@/components/Input';
 import { Button } from '@/components/Button';
 import { ProgressBar } from '@/components/ProgressBar';
+import { OnboardingHeader } from '@/components/OnboardingHeader';
 import { useOnboarding } from '@/contexts/OnboardingContext';
 import { Colors, Spacing, FontSize, FontWeight, BorderRadius } from '@/constants/theme';
 
@@ -62,6 +63,8 @@ export default function PersonalInfoScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}
     >
+      <OnboardingHeader showBack={true} onBack={() => router.back()} />
+      <View style={{ height: 100 }} />
       <ProgressBar current={2} total={5} />
       
       <ScrollView

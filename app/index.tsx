@@ -7,15 +7,34 @@ import { Colors, Spacing, FontSize, FontWeight } from '@/constants/theme';
 
 export default function WelcomeScreen() {
   const router = useRouter();
-  const { user, profile, loading, signOut } = useAuth();
+  const { user, profile, loading } = useAuth();
+
+  // Show loading screen while checking auth state
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <View style={styles.content}>
+          <View style={styles.logoContainer}>
+            <Image
+              source={require('@/assets/images/logo-full.png')}
+              style={styles.logo}
+              resizeMode="contain"
+            />
+          </View>
+          <Text style={styles.title}>Mepe Khai</Text>
+          <Text style={styles.subtitle}>Loading...</Text>
+        </View>
+      </View>
+    );
+  }
 
   // Redirect authenticated users to tabs layout
-  if (!loading && user && profile) {
+  if (user && profile) {
     return <Redirect href="/(tabs)" />;
   }
 
   // Redirect users without profile to onboarding
-  if (!loading && user && !profile) {
+  if (user && !profile) {
     return <Redirect href="/(onboarding)/welcome" />;
   }
 

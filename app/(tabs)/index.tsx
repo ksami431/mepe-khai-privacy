@@ -4,6 +4,8 @@ import { useRouter } from 'expo-router';
 import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
 import { MealShareCard } from '@/components/MealShareCard';
+import { MicronutrientCard } from '@/components/MicronutrientCard';
+import { WaterIntakeCard } from '@/components/WaterIntakeCard';
 import { useAuth } from '@/hooks/useAuth';
 import { useFoodLogs } from '@/hooks/useFoodLogs';
 import { getMealTypeEmoji } from '@/lib/constants';
@@ -132,6 +134,84 @@ export default function HomeScreen() {
           <MacroItem label="Fat" value={fat} target={fatTarget} color="#ef4444" styles={styles} />
         </View>
       </Card>
+
+      {/* Micronutrients Section */}
+      <View style={styles.micronutrientsSection}>
+        <Text style={styles.sectionTitle}>Micronutrients</Text>
+        <ScrollView 
+          horizontal 
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.micronutrientsScroll}
+        >
+          <MicronutrientCard
+            label="Sugar"
+            icon="🍬"
+            consumed={dailyTotals.sugar}
+            target={profile?.daily_sugar_limit_g || 50}
+            unit="g"
+            type="limit"
+          />
+          <MicronutrientCard
+            label="Sodium"
+            icon="🧂"
+            consumed={dailyTotals.sodium}
+            target={profile?.daily_sodium_limit_mg || 2300}
+            unit="mg"
+            type="limit"
+          />
+          <MicronutrientCard
+            label="Fiber"
+            icon="🌾"
+            consumed={dailyTotals.fiber}
+            target={profile?.daily_fiber_min_g || 30}
+            unit="g"
+            type="minimum"
+          />
+          <MicronutrientCard
+            label="Potassium"
+            icon="🥔"
+            consumed={dailyTotals.potassium}
+            target={profile?.daily_potassium_min_mg || 3400}
+            unit="mg"
+            type="minimum"
+          />
+          <MicronutrientCard
+            label="Calcium"
+            icon="🥛"
+            consumed={dailyTotals.calcium}
+            target={profile?.daily_calcium_min_mg || 1000}
+            unit="mg"
+            type="minimum"
+          />
+          <MicronutrientCard
+            label="Iron"
+            icon="🥩"
+            consumed={dailyTotals.iron}
+            target={profile?.daily_iron_min_mg || 18}
+            unit="mg"
+            type="minimum"
+          />
+          <MicronutrientCard
+            label="Vit C"
+            icon="🍊"
+            consumed={dailyTotals.vitamin_c}
+            target={profile?.daily_vitamin_c_min_mg || 90}
+            unit="mg"
+            type="minimum"
+          />
+          <MicronutrientCard
+            label="Vit A"
+            icon="🥕"
+            consumed={dailyTotals.vitamin_a}
+            target={profile?.daily_vitamin_a_min_mcg || 900}
+            unit="mcg"
+            type="minimum"
+          />
+        </ScrollView>
+      </View>
+
+      {/* Water Intake Section */}
+      <WaterIntakeCard />
 
       <View style={styles.quickActions}>
         <Text style={styles.sectionTitle}>Quick Actions</Text>
@@ -394,6 +474,13 @@ const createStyles = (theme: any) => StyleSheet.create({
   macroValue: {
     fontSize: FontSize.xs,
     color: theme.textMuted,
+  },
+  micronutrientsSection: {
+    marginBottom: Spacing.lg,
+  },
+  micronutrientsScroll: {
+    gap: Spacing.sm,
+    paddingHorizontal: 2,
   },
   quickActions: {
     marginBottom: Spacing.lg,
