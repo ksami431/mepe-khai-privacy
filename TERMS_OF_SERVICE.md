@@ -1,6 +1,6 @@
 # Terms of Service for Mepe Khai
 
-**Last Updated: March 19, 2026**
+**Last Updated: March 29, 2026**
 
 ## 1. Agreement to Terms
 
@@ -153,7 +153,6 @@ The App integrates with third-party services:
 
 - **Supabase**: Database and authentication
 - **Google Gemini AI**: Food photo analysis
-- **Open Food Facts**: Nutritional database
 - **Expo**: Development platform and notifications
 
 Your use of these services is subject to their respective terms and privacy policies. We are not responsible for third-party services.
@@ -256,7 +255,7 @@ These Terms are governed by the laws of [Your Jurisdiction], without regard to c
 
 ### Informal Resolution
 Before filing a claim, you agree to contact us to attempt informal resolution:
-- Email: support@mepekhai.com
+- Email: ksami933@gmail.com
 - We will attempt to resolve disputes within 30 days
 
 ### Arbitration
@@ -292,7 +291,7 @@ Provisions that should survive termination (including disclaimers, limitations o
 
 For questions, concerns, or notices regarding these Terms:
 
-**Email**: support@mepekhai.com  
+**Email**: ksami933@gmail.com  
 **Developer**: Sami Khan Fitness  
 **App Name**: Mepe Khai  
 **Response Time**: We aim to respond within 48 hours

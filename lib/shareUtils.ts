@@ -27,22 +27,31 @@ export async function shareView(viewRef: any, title: string = 'My Meal'): Promis
       return false;
     }
 
+    // Wait a moment for the view to fully render
+    await new Promise(resolve => setTimeout(resolve, 300));
+
     // Capture the view as an image
     const uri = await captureRef(viewRef, {
       format: 'png',
       quality: 1,
+      result: 'tmpfile',
     });
+
+    if (!uri) {
+      throw new Error('Failed to capture view');
+    }
 
     // Share the image
     await Sharing.shareAsync(uri, {
       mimeType: 'image/png',
       dialogTitle: title,
+      UTI: 'public.png',
     });
 
     return true;
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error sharing view:', error);
-    Alert.alert('Error', 'Failed to share. Please try again.');
+    Alert.alert('Error', error.message || 'Failed to share. Please try again.');
     return false;
   }
 }

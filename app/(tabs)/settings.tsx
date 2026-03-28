@@ -257,7 +257,7 @@ export default function SettingsScreen() {
 
         <TouchableOpacity
           style={styles.linkRow}
-          onPress={() => handleOpenLink('https://mepekhai.com/terms', 'Terms of Service')}
+          onPress={() => Linking.openURL('https://github.com/ksami431/mepe-khai-privacy/blob/main/TERMS_OF_SERVICE.md')}
         >
           <Text style={styles.linkLabel}>Terms of Service</Text>
           <Text style={styles.linkArrow}>➜</Text>
