@@ -1,6 +1,6 @@
 # Privacy Policy for Mepe Khai
 
-**Last Updated: March 19, 2026**
+**Last Updated: March 28, 2026**
 
 ## Introduction
 
@@ -92,11 +92,6 @@ We use the following third-party services:
 - **Data Shared**: Food photos, food descriptions (temporarily, not stored)
 - **Privacy Policy**: https://policies.google.com/privacy
 
-### Open Food Facts API
-- **Purpose**: Barcode scanning, nutritional database
-- **Data Shared**: Barcode numbers (no personal data)
-- **Privacy Policy**: https://world.openfoodfacts.org/privacy-policy
-
 ### Expo Platform
 - **Purpose**: App development framework, push notifications
 - **Data Shared**: Device tokens for notifications, crash reports
@@ -128,8 +123,10 @@ You have the following rights regarding your data:
 
 ### Deletion
 - Delete individual entries (meals, activities, photos)
-- Request complete account deletion by contacting us
-- Upon account deletion, all your data will be permanently removed within 30 days
+- **Delete your entire account** from Settings → Danger Zone
+- All data will be permanently deleted immediately
+- Cannot be recovered after deletion
+- No waiting period for self-service deletion
 
 ### Opt-Out Options
 - Disable push notifications in app settings
@@ -191,7 +188,7 @@ If you are in the European Economic Area (EEA), you have rights under GDPR:
 
 If you have questions, concerns, or requests regarding this Privacy Policy or your data:
 
-**Email**: privacy@mepekhai.com  
+**Email**: ksami933@gmail.com  
 **Developer**: Sami Khan Fitness  
 **Response Time**: We aim to respond within 48 hours
 
