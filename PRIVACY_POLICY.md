@@ -1,7 +1,7 @@
 # Privacy Policy for Mepe Khai
 
 **Effective Date: March 28, 2026**  
-**Last Updated: March 28, 2026**
+**Last Updated: May 18, 2026**
 
 ---
 
@@ -50,6 +50,13 @@ By using Mepe Khai, you agree to the collection and use of information in accord
 - Exercise type and duration
 - Calories burned (manually entered)
 - Activity logs and timestamps
+
+**Apple Health Data (iOS only, optional):**
+- Step count (read-only from Apple Health)
+- Active calories burned (read-only from Apple Health)
+- This data is only accessed if you explicitly tap "Connect Apple Health" and grant permission
+- We only READ from Apple Health — we never write or modify your Health data
+- You can revoke this permission at any time in Settings > Privacy & Security > Health > Mepe Khai
 
 **Progress Tracking:**
 - Weight logs over time
@@ -481,7 +488,8 @@ You may withdraw your consent at any time by deleting your account.
 | Data Type | Purpose | Storage Location | Retention Period | Third Parties |
 |-----------|---------|------------------|------------------|---------------|
 | Account Info | Authentication | Supabase Cloud | Until deletion | Supabase |
-| Food Logs | Nutrition Tracking | Supabase Cloud | Until deletion | Supabase |
+| Activity & Exercise | Activity Tracking | Supabase Cloud | Until deletion | Supabase |
+| Apple Health (Steps/Calories) | Activity Tracking | Your Device Only | Never uploaded | None |
 | Meal Photos | AI Analysis | Temporary | Not stored | Google Gemini |
 | Weight Logs | Progress Tracking | Supabase Cloud | Until deletion | Supabase |
 | Water Logs | Hydration Tracking | Supabase Cloud | Until deletion | Supabase |
@@ -507,6 +515,6 @@ This Privacy Policy complies with:
 
 ---
 
-**Version:** 2.0  
+**Version:** 2.1  
 **Effective Date:** March 28, 2026  
-**Last Reviewed:** March 28, 2026
+**Last Reviewed:** May 18, 2026

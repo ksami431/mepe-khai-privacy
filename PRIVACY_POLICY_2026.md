@@ -1,7 +1,7 @@
 # Privacy Policy for Mepe Khai
 
 **Effective Date: March 28, 2026**  
-**Last Updated: March 28, 2026**
+**Last Updated: May 18, 2026**
 
 ---
 
@@ -50,6 +50,13 @@ By using Mepe Khai, you agree to the collection and use of information in accord
 - Exercise type and duration
 - Calories burned (manually entered)
 - Activity logs and timestamps
+
+**Apple Health Data (iOS only, optional):**
+- Step count (read-only from Apple Health)
+- Active calories burned (read-only from Apple Health)
+- This data is only accessed if you explicitly tap "Connect Apple Health" and grant permission
+- We only READ from Apple Health — we never write or modify your Health data
+- You can revoke this permission at any time in Settings > Privacy & Security > Health > Mepe Khai
 
 **Progress Tracking:**
 - Weight logs over time
