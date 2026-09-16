@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mepe Khai — 14 Days Free</title>
+  <style>
+    :root {
+      --primary: #16a34a;
+      --primary-dark: #15803d;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(180deg, #ecfdf5 0%, var(--bg) 40%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 24px 20px 40px;
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .logo h1 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .logo p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-top: 20px;
+      box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    .badge {
+      display: inline-block;
+      background: #dcfce7;
+      color: var(--primary-dark);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 6px 10px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+    }
+
+    .sub {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.5;
+      margin: 0 0 20px;
+    }
+
+    .code-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #f1f5f9;
+      border: 2px dashed #cbd5e1;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+    }
+
+    .code {
+      flex: 1;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--text);
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      transition: opacity 0.15s;
+    }
+
+    button:active { opacity: 0.85; }
+
+    .copy-btn {
+      background: #e2e8f0;
+      color: var(--text);
+      padding: 10px 14px;
+      white-space: nowrap;
+    }
+
+    .copy-btn.copied {
+      background: #dcfce7;
+      color: var(--primary-dark);
+    }
+
+    .install-btn {
+      display: block;
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      padding: 16px 20px;
+      font-size: 17px;
+      margin-top: 8px;
+    }
+
+    .install-btn.secondary {
+      background: white;
+      color: var(--primary-dark);
+      border: 2px solid var(--primary);
+      margin-top: 10px;
+    }
+
+    .steps {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .steps li { margin-bottom: 8px; }
+
+    .steps strong { color: var(--primary-dark); }
+
+    .note {
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .hidden { display: none !important; }
+
+    footer {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="logo">
+      <h1>Mepe Khai</h1>
+      <p>AI-powered nutrition tracking by Sami Khan Fitness</p>
+    </div>
+
+    <div class="card">
+      <span class="badge">Limited offer</span>
+      <h2>Get 14 days of full access free</h2>
+      <p class="sub">
+        Photo logging, voice logging, and the AI coach — unlocked.
+        New users also get a starter trial, so you can have up to 17 days total.
+      </p>
+
+      <div class="code-box">
+        <span class="code" id="promoCode">MEPE-FREE14</span>
+        <button class="copy-btn" id="copyBtn" type="button">Copy</button>
+      </div>
+
+      <p class="note">Save this code before installing. You will enter it in the app after signing up.</p>
+
+      <a id="primaryInstall" class="install-btn" href="#" style="text-decoration:none;text-align:center;">
+        Install Mepe Khai
+      </a>
+      <a id="iosInstall" class="install-btn secondary hidden" href="#" style="text-decoration:none;text-align:center;">
+        App Store (iPhone)
+      </a>
+      <a id="androidInstall" class="install-btn secondary hidden" href="#" style="text-decoration:none;text-align:center;">
+        Google Play (Android)
+      </a>
+    </div>
+
+    <div class="card">
+      <h2 style="font-size:18px;margin-bottom:12px;">How to activate</h2>
+      <ol class="steps">
+        <li>Tap <strong>Install</strong> above and download Mepe Khai.</li>
+        <li>Sign up and complete the quick setup.</li>
+        <li>Go to <strong>Profile</strong> → tap <strong>Have an activation code?</strong></li>
+        <li>Enter <strong>MEPE-FREE14</strong> and tap Verify.</li>
+      </ol>
+    </div>
+
+    <footer>
+      Mepe Khai is a nutrition tracking tool, not medical advice.
+      <br />
+      <a href="https://ksami431.github.io/mepe-khai-privacy/" style="color:var(--muted);">Privacy Policy</a>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      var PROMO_CODE = 'MEPE-FREE14';
+      var APP_STORE =
+        'https://apps.apple.com/app/id6762403126?ct=qr-free14';
+      var PLAY_STORE =
+        'https://play.google.com/store/apps/details?id=com.mepekhai.app&referrer=utm_source%3Dqr%26utm_campaign%3Dfree14';
+
+      var ua = navigator.userAgent || navigator.vendor || window.opera;
+      var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+      var isAndroid = /android/i.test(ua);
+
+      var primary = document.getElementById('primaryInstall');
+      var iosBtn = document.getElementById('iosInstall');
+      var androidBtn = document.getElementById('androidInstall');
+      var copyBtn = document.getElementById('copyBtn');
+
+      if (isIOS) {
+        primary.href = APP_STORE;
+        primary.textContent = 'Install from App Store';
+      } else if (isAndroid) {
+        primary.href = PLAY_STORE;
+        primary.textContent = 'Install from Google Play';
+      } else {
+        primary.classList.add('hidden');
+        iosBtn.classList.remove('hidden');
+        androidBtn.classList.remove('hidden');
+        iosBtn.href = APP_STORE;
+        androidBtn.href = PLAY_STORE;
+      }
+
+      copyBtn.addEventListener('click', function () {
+        function onCopied() {
+          copyBtn.textContent = 'Copied!';
+          copyBtn.classList.add('copied');
+          setTimeout(function () {
+            copyBtn.textContent = 'Copy';
+            copyBtn.classList.remove('copied');
+          }, 2000);
+        }
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(PROMO_CODE).then(onCopied).catch(fallbackCopy);
+        } else {
+          fallbackCopy();
+        }
+
+        function fallbackCopy() {
+          var ta = document.createElement('textarea');
+          ta.value = PROMO_CODE;
+          ta.style.position = 'fixed';
+          ta.style.left = '-9999px';
+          document.body.appendChild(ta);
+          ta.select();
+          try {
+            document.execCommand('copy');
+            onCopied();
+          } catch (e) {
+            copyBtn.textContent = 'Select & copy';
+          }
+          document.body.removeChild(ta);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
